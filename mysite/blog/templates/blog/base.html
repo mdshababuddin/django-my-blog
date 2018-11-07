@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Blog</title>
+
+	<!--Bootstrap-->
+	<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional theme 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+	<!--Medium Style editor-->
+	<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+	
+    <!--Custom CSS-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+	
+
+	<!--Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans|Spicy+Rice" rel="stylesheet">
+
+
+</head>
+<body>
+	<!--Navbar-->
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<div class="container">
+			<ul class="nav navbar-nav navbar-dark">
+				<li class="nav-item"><a class="navbar-brand" href="{% url 'post_list' %}">My Blog</a></li>
+				<li class="nav-item"><a class="nav-link" href="https://www.github.com/mdshababuddin" style="font-weight: bold;color: white">Github</a></li>
+				<li class="nav-item"><a class="nav-link" href="http://www.shopasfriendly.com" style="font-weight: bold;color: white">Shop As Friendly</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-dark navbar-right">
+				{% if user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'post_new' %}" style="font-weight: bold;color: white">New Post</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'post_draft_list' %}" style="font-weight: bold;color: white">Drafts</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'logout' %}" style="font-weight: bold;color: white">Log Out</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" style="font-weight: bold;color: white">Welcome : {{ user.username }}</a>
+					</li>
+				{% else %}
+				<li class="nav-item"><a class="nav navbar-right" href="{% url 'login' %}"><span class="glyphicon glyphicon-user" style="font-weight: bold;color: white">Login</span></a></li>
+				{% endif %}
+			</ul>
+			
+		</div>
+	</nav>
+
+
+	<!--Content Blog-->
+	<div class="content container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="blog_posts">
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

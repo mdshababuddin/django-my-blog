@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	
+	<div class="jumbo" style="margin-left: 200px;margin-top: 100px;margin-right: -70px">
+		<div class="jumbotron" style="background-color: #ccffff">
+		    <h2 style="text-align: center;color: #4d1933;font-weight: bold;">Please Login</h2><br>
+		    
+
+		    {% if form.errors %}
+		    	<h3>(Must be a SuperUser, please check with the site admin)</h3>
+			    <p>You username and password didn't match! Please try again.</p>
+		    {% endif %}
+
+		    <form action="{% url 'login' %}" method="POST">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+			    <input type="submit" class="btn btn-primary" value="Login" style="width: 300px;margin-left: 120px;">
+			    <input type="hidden" name="next" value="{{next}}">
+		    </form>
+	    </div>
+	</div>
+	
+
+{% endblock %}

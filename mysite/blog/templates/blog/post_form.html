@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+	
+	<div style="border: 5px solid #000000; margin-top: 50px; width: 400px; text-align: center; border-radius: 15px; margin-left: 370px">
+		<h1 style="color: #660033; font-weight: bold;">New Post</h1>
+		<form class="post-form" method="POST">
+		    {% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="save btn btn-primary" name="button" style="width: 200px; text-align: center;margin-bottom: 10px">Save</button>
+	    </form>
+	</div>
+	
+
+	<script>var editor = new MediumEditor('.editable');</script>
+
+{% endblock %}
